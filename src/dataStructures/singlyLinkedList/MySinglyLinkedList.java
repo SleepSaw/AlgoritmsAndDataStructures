@@ -1,5 +1,7 @@
 package dataStructures.singlyLinkedList;
 
+import dataStructures.doublyLinkedList.DoublyLinkedList;
+
 import java.util.ArrayList;
 import java.util.List;
 /**
@@ -95,6 +97,8 @@ public class MySinglyLinkedList {
         }
         if (rootNode == nodeForDelete) {
             rootNode = rootNode.next;
+            length--;
+            return;
         }
         while (node != lastNode){
             if (node.next == nodeForDelete){
@@ -102,10 +106,8 @@ public class MySinglyLinkedList {
                 break;
             }
             node = node.next;
-            if (node == lastNode) {
-                System.out.println("Node was not found");
-            }
         }
+        length--;
     }
 
     /**
@@ -125,12 +127,14 @@ public class MySinglyLinkedList {
         }
         if (index == 0) {
             rootNode = rootNode.next;
+            length--;
             return;
         }
         for (int i = 1; i < index; i++) {
             node = node.next;
         }
         node.next = node.next.next;
+        length--;
     }
 
     /**
@@ -217,6 +221,30 @@ class Node{
     public String toString() {
         return "Node: " + "value= " + value +";";
     }
+}
+class Main {
+    public static void main(String[] args) {
+        MySinglyLinkedList list = new MySinglyLinkedList();
+        Node node1 = new Node(1);
+        Node node2 = new Node(2);
+        Node node3 = new Node(3);
+        Node node4 = new Node(4);
+        Node node5 = new Node(5);
+
+        list.add(node1);list.add(node2);
+        list.add(node3);list.add(node4);
+        list.add(node5);
+
+        for (int i = 0; i < list.length(); i++) {
+            System.out.println(list.get(i));
+        }
+        System.out.println("---------------------------------------------------");
+        list.delete(node1);
+        for (int i = 0; i < list.length(); i++) {
+            System.out.println(list.get(i));
+        }
+    }
+
 }
 
 
